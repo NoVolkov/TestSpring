@@ -4,9 +4,12 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 public class YellowAGr implements State{
-    private State color;
-
+    private static State color;
+    static {
+        color=new Red();
+    }
     public YellowAGr() {
+
     }
 
     public YellowAGr(State st){

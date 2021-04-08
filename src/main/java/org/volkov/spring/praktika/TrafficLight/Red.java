@@ -5,9 +5,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 public class Red implements State{
-    private State color;
-
+    private static State color;
+    static {
+        color=new YellowBGr();
+    }
     public Red() {
+
     }
 
     public Red(State st){

@@ -13,20 +13,20 @@ public class Config {
 
 
     @Bean("gr")
-    public Green getGr(@Qualifier("ya") State st){//@Qualifeir (цвет) конструктор
-        return new Green(st);
+    public Green getGr(){//@Qualifier("ya") State st
+        return new Green();
     }
     @Bean("ya")
-    public YellowAGr getYA(@Qualifier("r") State st){
-        return new YellowAGr(st);
+    public YellowAGr getYA(){//@Qualifier("r") State st
+        return new YellowAGr();
     }
     @Bean("r")
-    public Red getR(@Qualifier("yb") State st){
-        return new Red(st);
+    public Red getR(){//@Qualifier("yb") State st
+        return new Red();
     }
     @Bean("yb")
-    public YellowBGr getYB(@Qualifier("gr") State st){
-        return new YellowBGr(st);
+    public YellowBGr getYB(){//@Qualifier("gr") State st
+        return new YellowBGr();
     }
 
 }
