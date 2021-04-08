@@ -10,20 +10,23 @@ public class Config {
     public TrafficLight getTrL(@Qualifier("gr") State st){
         return new TrafficLight(st);
     }
+
+
     @Bean("gr")
-    public Green getGr(){//@Qualifeir (цвет) конструктор
-        return new Green();
+    public Green getGr(@Qualifier("ya") State st){//@Qualifeir (цвет) конструктор
+        return new Green(st);
     }
     @Bean("ya")
-    public YellowAGr getYA(){
-        return new YellowAGr();
-    }
-    @Bean("yb")
-    public YellowBGr getYB(){
-        return new YellowBGr();
+    public YellowAGr getYA(@Qualifier("r") State st){
+        return new YellowAGr(st);
     }
     @Bean("r")
-    public Red getR(){
-        return new Red();
+    public Red getR(@Qualifier("yb") State st){
+        return new Red(st);
     }
+    @Bean("yb")
+    public YellowBGr getYB(@Qualifier("gr") State st){
+        return new YellowBGr(st);
+    }
+
 }

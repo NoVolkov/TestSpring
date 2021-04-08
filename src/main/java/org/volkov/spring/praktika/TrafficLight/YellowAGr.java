@@ -4,16 +4,23 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 public class YellowAGr implements State{
+    private State color;
 
+    public YellowAGr() {
+    }
+
+    public YellowAGr(State st){
+        color=st;
+    }
     @Override
     public String getColor() {
-        return null;
+        return "yellow";
     }
 
     @Override
     public void next(@Qualifier("trl") TrafficLight tf) {
-        tf.setState(new Red());
-        System.out.println("Red");
+        tf.setState(color);//new Red()
+        System.out.println(color.getColor());//"Red"
 
     }
 }
