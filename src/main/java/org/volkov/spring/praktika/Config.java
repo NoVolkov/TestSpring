@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
+import org.volkov.spring.praktika.Default.DABPR;
 
 import java.util.*;
 
@@ -20,6 +21,13 @@ public class Config {
     public A getAPrototype(){
         return new A(new Random().nextInt());
     }*/
+    @Bean
+    public org.volkov.spring.praktika.Default.Student getStDef(){
+        //System.out.println("Create");
+        return new org.volkov.spring.praktika.Default.Student();
+    }
+    @Bean
+    public DABPR getDABPR(){return new DABPR();}
     @Bean
     public Student getStV(){
         return new Student("Вася",3);

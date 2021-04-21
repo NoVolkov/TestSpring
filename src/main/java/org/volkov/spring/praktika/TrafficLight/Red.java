@@ -1,18 +1,20 @@
 package org.volkov.spring.praktika.TrafficLight;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 public class Red implements State{
-    private static State color;
-    static {
+    @Autowired
+    @Qualifier("yb")
+    private State color;
+    /*static {
         color=new YellowBGr();
-    }
+    }*/
     public Red() {
 
     }
-
     public Red(State st){
         color=st;
     }
