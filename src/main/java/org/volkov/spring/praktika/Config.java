@@ -22,8 +22,8 @@ public class Config {
         return new A(new Random().nextInt());
     }*/
     @Bean
+    @Scope("prototype")
     public org.volkov.spring.praktika.Default.Student getStDef(){
-        //System.out.println("Create");
         return new org.volkov.spring.praktika.Default.Student();
     }
     @Bean

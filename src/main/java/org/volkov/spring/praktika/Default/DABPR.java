@@ -15,12 +15,12 @@ public class DABPR implements BeanPostProcessor {
     //взять из ApplicationContext
     //завести map(тип, значение)
     //использовать postProccessBefore (заранее, если не прописаны поля)
-    private static HashMap<String,String> m=new HashMap<>();
+    private static HashMap<Class,String> m=new HashMap<>();
 
     static {
         //System.out.println("Here");
-        m.put("String","Hello there");
-        m.put("Integer","1234");
+        m.put(String.class,"Hello there");
+        m.put(Integer.class,"1234");
     }
 
 
@@ -31,38 +31,27 @@ public class DABPR implements BeanPostProcessor {
     }
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        //System.out.println("EnterPost");
         Field[] fields=bean.getClass().getDeclaredFields();
-
         Arrays.stream(fields)
                 .filter(q->q.isAnnotationPresent(DefaultName.class))
-                .findFirst()
-                .ifPresent(y->{
-                    try {
-                        System.out.println("EnterInAnnotation");
-                        //ReflectionUtils.setField(y,bean,"HELLO");
-                        //System.out.println(y.getName().getClass().getSimpleName());
-                        String name=y.getName().getClass().getSimpleName();
+                .forEach(x->{
+                        Class cl=x.getType();
                         m.entrySet().stream()
-                                //.filter(x->x.getKey().compareTo(name.endsWith()))
-                                .filter(x->name.compareTo(x.getKey())==0)
-                                .forEach(z->{
-                                    System.out.println(z.getKey());
-                                    if(z.getClass().getTypeName().compareTo("Integer")==0){
-                                        System.out.println(z);
+                                .filter(y->y.getKey().equals(cl))
+                                .forEach(z-> {
+                                    try {
+                                        Number n;
+                                        if (x.getType().equals(Integer.class)){
+                                            n=Integer.parseInt(z.getValue());
+                                            x.set(bean,n);
+                                        }else{
+                                            x.set(bean,z.getValue());
+                                        }
+                                    } catch (IllegalAccessException e) {
+                                        e.printStackTrace();
                                     }
-                                    ReflectionUtils.setField(y,bean,z.getValue());
                                 });
-
-                    }
-                    catch (Exception e){
-                        throw new RuntimeException(e);
-                    }
                 });
-
-
-
-
         return bean;
     }
 }

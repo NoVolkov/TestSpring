@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 
-import javax.annotation.PostConstruct;
+//import javax.annotation.PostConstruct;
 import java.util.List;
 
 public class Student {
@@ -42,8 +42,5 @@ public class Student {
                 ", avrg=" + avrg +
                 '}';
     }
-    @PostConstruct
-    public void test(){
-        System.out.println("Test");
-    }
+
 }
